@@ -31,18 +31,20 @@ codeword=cell(1,n);
 dummy=zeros(n,stages);
 %i will take a copy of the probabilites matrix inorder to do some
 %operations without changing the original one
+%matrix that i will store the arrows in dummy
+indicies=zeros(n,stages);
 
 for i=1:stages
-    [x,y]=sort(Modified_Symbols_prob,'descend');
+    [Modified_Symbols_prob,y]=sort(Modified_Symbols_prob,'descend');
     %min prob
-    dummy(y(length(x)),i)=11;
-    dummy(y(length(x))-1,i)=10;
-    Modified_Symbols_prob(y(length(x))-1)= Modified_Symbols_prob(y(length(x)))+ Modified_Symbols_prob(y(length(x))-1);
-    Modified_Symbols_prob(y(length(x)))=0;
+    dummy(length(Modified_Symbols_prob),i)=11;
+    dummy(length(Modified_Symbols_prob)-1,i)=10;
+    Modified_Symbols_prob(length(Modified_Symbols_prob)-1)= Modified_Symbols_prob(length(Modified_Symbols_prob))+ Modified_Symbols_prob(length(Modified_Symbols_prob)-1);
+    %Modified_Symbols_prob(length(Modified_Symbols_prob)=[];
+    Modified_Symbols_prob(length(Modified_Symbols_prob))=0;
     Modified_Symbols_prob=nonzeros(Modified_Symbols_prob');
+    
+    indicies(1,i)=y(1);
+    
 end    
-%Symbols_prob_copy(i,j)
-%a=[1,2,3,4;5,6,7,8];
-%[a,b]=sort(a,'descend');
-%this will loop 9 times in this case
 
