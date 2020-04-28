@@ -69,16 +69,20 @@ for i=1:stages
     %y=nonzeros(y');
 end
    
-% for i=1:n 
-%    for j=1:stages
-%       rownum=indicies(i,j); 
-%       if dummy(rownum,j)==10
-%           codeword(i)=strcat(codeword(i),'0');
-%       elseif dummy(rownum,j)==11
-%           codeword(i)=strcat(codeword(i),'1');
-%       end
-%    end
-% end
+for i=1:n 
+   for j=1:stages
+      rownum=indicies(i,j);
+      if rownum==0
+          continue
+      else
+          if dummy(rownum,j)==10
+              codeword(i)=strcat(codeword(i),'0');
+          elseif dummy(rownum,j)==11
+              codeword(i)=strcat(codeword(i),'1');
+          end
+      end
+   end
+end
 
 
 
