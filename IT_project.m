@@ -33,18 +33,52 @@ dummy=zeros(n,stages);
 %operations without changing the original one
 %matrix that i will store the arrows in dummy
 indicies=zeros(n,stages);
+counter=10;
+
+nn = 0;
+
 
 for i=1:stages
     [Modified_Symbols_prob,y]=sort(Modified_Symbols_prob,'descend');
+    
     %min prob
-    dummy(length(Modified_Symbols_prob),i)=11;
-    dummy(length(Modified_Symbols_prob)-1,i)=10;
-    Modified_Symbols_prob(length(Modified_Symbols_prob)-1)= Modified_Symbols_prob(length(Modified_Symbols_prob))+ Modified_Symbols_prob(length(Modified_Symbols_prob)-1);
+    dummy(counter,i)=11;
+    dummy(counter-1,i)=10;
+    Modified_Symbols_prob(counter-1)= Modified_Symbols_prob(counter)+ Modified_Symbols_prob(counter-1);
     %Modified_Symbols_prob(length(Modified_Symbols_prob)=[];
-    Modified_Symbols_prob(length(Modified_Symbols_prob))=0;
-    Modified_Symbols_prob=nonzeros(Modified_Symbols_prob');
+    Modified_Symbols_prob(counter)=0;
+
+   %hena ana bkhly el indices bt2el wahed kol mara 3alshan lama yekon el
+   %r=2 fel stage rkm 9 yekon 3ndy 2 indicies bs
+   %indicies(1,1)=y(1) and so on
+   %if row=10 and i ay rkm gher 1 w a2l mn 10 then
+   %h7ot 0 in matrix from inidicies(10:10,i)=0; then increment
+
+    jj=stages;
+    for row=1:n    
+        indicies(n-jj,i) = y(n-jj);
+        jj = jj-1;
+        if ((i == 2)|| (i == 3)||(i ==4) || (i==5) || (i==6) || (i ==7)|| (i ==8) || (i == 9)) && row == 10
+            indicies(row-nn:row,i) =0;
+            nn = nn+1;
+        end        
+    end
     
-    indicies(1,i)=y(1);
-    
-end    
+    counter=counter-1;
+    %y(counter)=0;
+    %y=nonzeros(y');
+end
+   
+% for i=1:n 
+%    for j=1:stages
+%       rownum=indicies(i,j); 
+%       if dummy(rownum,j)==10
+%           codeword(i)=strcat(codeword(i),'0');
+%       elseif dummy(rownum,j)==11
+%           codeword(i)=strcat(codeword(i),'1');
+%       end
+%    end
+% end
+
+
 
